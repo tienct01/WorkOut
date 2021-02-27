@@ -56,6 +56,9 @@ public class WorkoutDetailFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        if(savedInstanceState != null){
+            workoutId = savedInstanceState.getLong("workoutId");
+        }
     }
 
 
@@ -71,13 +74,17 @@ public class WorkoutDetailFragment extends Fragment {
             textDescription.setText(workout.getDescription());
         }
     }
-
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putLong("workoutId", workoutId);
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_workout_detail, container, false);
     }
+
 
     public void setWorkoutId(long id){
         this.workoutId = id;
